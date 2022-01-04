@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, SafeAreaView, KeyboardAvoidingView, TextInput, TouchableOpacity, Keyboard, FlatList } from 'react-native'
 import Task from '../components/Task'
+import {Foundation, Ionicons} from "@expo/vector-icons"
 
 const HomeScreen = () => {
     const [task, setTask] = useState("");
@@ -24,6 +25,21 @@ const HomeScreen = () => {
         Keyboard.dismiss()
     }
 
+    const completeTask = (index) => {
+        let itemsCopy = [...taskLists];
+        itemsCopy.splice(index, 1);
+        setTaskLists(itemsCopy)
+    }
+    
+    const onPress = () => {
+        if(task) {
+            handleAddTask();   
+        }else {
+            null
+            // onPlusClicked();
+        }
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.sectionContainer}>
@@ -40,10 +56,12 @@ const HomeScreen = () => {
                 <View style={styles.tasksContainer}>
                     <FlatList
                         data={taskLists}
-                        keyExtractor={(item, index) => item.key}
+                        // keyExtractor={(item, index) => item.key}
                         showsVerticalScrollIndicator={false}
-                        renderItem={({item}) => 
-                        <Task title={item}/>
+                        renderItem={({item, index}) => 
+                        <TouchableOpacity  key={index} onPressIn={() => completeTask(index)}>
+                            <Task title={item}/>
+                        </TouchableOpacity>
                         }
                     />
                 </View>
@@ -58,9 +76,12 @@ const HomeScreen = () => {
                     value={task} //For real time changes
                     onChangeText={text => setTask(text)} 
                 />
-                <TouchableOpacity onPress={handleAddTask} >
+                <TouchableOpacity onPress={onPress} >
                 <View style={styles.addWrapper}>
-                    <Text style={styles.addText}>+</Text>
+                    {task ? <Ionicons name="send" size={18} color="#000" style={styles.icon} /> :
+                    <Foundation name="plus" size={18} color="black" style={styles.icon} />
+                    }
+                    
                 </View>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
@@ -95,7 +116,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',        
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
   },
   tasksContainer: {
   },
@@ -107,6 +128,9 @@ const styles = StyleSheet.create({
     borderColor: '#C0C0C0',
     borderWidth: 1,
     width: 250,
+  },
+  icon: {
+      marginHorizontal: 5,
   },
   addWrapper: {
     width: 50,
