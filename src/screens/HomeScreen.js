@@ -71,6 +71,7 @@ const HomeScreen = () => {
                 style={styles.writeTaskWrapper}
             >
                 <TextInput 
+                    placeholder="Task"
                     style={styles.input} 
                     placeholder={'Write a task'}
                     value={task} //For real time changes
