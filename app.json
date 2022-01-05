@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "todo",
+    "name": "TodoNow",
     "slug": "todo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./todoAssets/logo png.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./todoAssets/todo logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,13 +20,14 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "todonow.todo",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./todoAssets/todo logo.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./todoAssets/logo png.png"
     }
   }
 }
